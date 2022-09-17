@@ -3,7 +3,7 @@ if engine.ActiveGamemode() == "terrortown" then
 
     require( "atmosphere" )
 
-    local atmosphere_Run = atmosphere.Run
+    local atmosphere_Menu = atmosphere.Menu
     local GetGlobalFloat = GetGlobalFloat
     local timer_Create = timer.Create
     local math_floor = math.floor
@@ -16,14 +16,14 @@ if engine.ActiveGamemode() == "terrortown" then
         timer_Create(addonName, 1, 3, function()
             local time = math_max( 0, math_floor( GetGlobalFloat( "ttt_round_end", 0 ) - CurTime() ) )
             if (time > 1) then
-                atmosphere_Run( "discord.rpc.setupRoundTime", tostring( time ) )
+                atmosphere_Menu( "discord.rpc.setupRoundTime", tostring( time ) )
             else
-                atmosphere_Run( "discord.rpc.clearGameTime" )
+                atmosphere_Menu( "discord.rpc.clearGameTime" )
             end
         end)
     end
 
-    local hook_Add = hook.Add 
+    local hook_Add = hook.Add
     hook_Add("TTTBeginRound", addonName, function()
         Update()
     end)
